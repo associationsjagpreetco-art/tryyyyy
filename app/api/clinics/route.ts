@@ -1,0 +1,3 @@
+import { NextResponse } from 'next/server'; import { prisma } from '@/lib/prisma';
+export async function GET(){const clinics=await prisma.clinic.findMany({orderBy:{name:'asc'}});return NextResponse.json(clinics)}
+export async function PATCH(req:Request){try{const b=await req.json();const clinic=await prisma.clinic.update({where:{id:b.id},data:{name:b.name,phone:b.phone,address:b.address,doctorName:b.doctorName,language:b.language,slotMinutes:Number(b.slotMinutes),openingTime:b.openingTime,closingTime:b.closingTime,modules:Array.isArray(b.modules)?b.modules.join(','):b.modules}});return NextResponse.json(clinic)}catch(e){return NextResponse.json({error:'Could not update clinic settings'},{status:400})}}
