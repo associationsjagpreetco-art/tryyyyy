@@ -45,6 +45,7 @@ model Patient {
   appointments Appointment[]
   followups    FollowUp[]
   orders       OpticalOrder[]
+  messages     Message[]
 
   @@unique([clinicId, phone])
   @@index([clinicId, name])
